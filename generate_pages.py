@@ -1,12 +1,20 @@
 import csv
 import os
+import shutil
 
 CSV_FILE = "students.csv"
 TEMPLATE_FILE = "template.html"
+TEMPLATE_CSS = "template.css"
 OUTPUT_DIR = "docs"
+CSS_OUTPUT_DIR = os.path.join(OUTPUT_DIR, "assets", "css")
 
 # create main output folder
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# create css directory and copy template.css
+os.makedirs(CSS_OUTPUT_DIR, exist_ok=True)
+shutil.copy(TEMPLATE_CSS, os.path.join(CSS_OUTPUT_DIR, "styles.css"))
+print(f"✔ Copied {TEMPLATE_CSS} to {os.path.join(CSS_OUTPUT_DIR, 'styles.css')}")
 
 # read template
 with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
