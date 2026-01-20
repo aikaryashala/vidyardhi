@@ -31,9 +31,14 @@ with open(CSV_FILE, newline="", encoding="utf-8") as csvfile:
         student_dir = os.path.join(OUTPUT_DIR, student_id)
         os.makedirs(student_dir, exist_ok=True)
 
+        # construct projects URL from github URL
+        github_url = row["github"].strip()
+        github_username = github_url.split("/")[-1]
+        row["projects"] = f"http://aikaryashala.com/projects-{github_username}/"
+
         html = template
 
-        # replace placeholders (name, email, image, github, linkedin)
+        # replace placeholders (name, email, image, github, linkedin, projects)
         for key, value in row.items():
             html = html.replace(f"{{{{{key}}}}}", value)
 
